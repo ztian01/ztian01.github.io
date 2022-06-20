@@ -1,5 +1,7 @@
-# Title 1
-## Title 2
-### Title 3
+# RNASeq
+RNASeq: [RNASeq.md](./RNASeq.md)
+# AmpliconSeq
+AmpliconSeq: [AmpliconSeq.md](./AmpliconSeq.md)
+# Huangli
 contents
 contents
