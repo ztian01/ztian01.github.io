@@ -1,5 +1,5 @@
 ## RNASeq
-[Discover differentially expressed genes by RNASeq Analysis](./RNASeq.md)
+- [A case of discovering differentially expressed genes by RNASeq analysis](./RNASeq.md)
 ## AmpliconSeq
 AmpliconSeq: [AmpliconSeq.md](./AmpliconSeq.md)
 ## Huangli
