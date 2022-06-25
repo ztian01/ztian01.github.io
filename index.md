@@ -1,7 +1,7 @@
-# RNASeq
-RNASeq: [RNASeq.md](./RNASeq.md)
-# AmpliconSeq
+## RNASeq
+[Discover differentially expressed genes by RNASeq Analysis](./RNASeq.md)
+## AmpliconSeq
 AmpliconSeq: [AmpliconSeq.md](./AmpliconSeq.md)
-# Huangli
+## Huangli
 contents
 contents
