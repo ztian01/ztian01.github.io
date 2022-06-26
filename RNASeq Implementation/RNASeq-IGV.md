@@ -1,12 +1,12 @@
 # RNASeq Analysis - Reads Visualization and Quantification
-**Shells:** Shell <br>
+**Languages:** Shell <br>
 **Softwares / packages:** sratoolkit, FastQC, MultiQC, Trimmomatic, fastp, HISAT2, Samtools, featureCounts <br>
 **Data:**  Himes, Blanca E., et al. "RNA-Seq transcriptome profiling identifies CRISPLD2 as a glucocorticoid responsive
  gene that modulates cytokine function in airway smooth muscle cells." PloS one 9.6 (2014): e99625.
 ## SRA files acquisition
 A SRR_Acc_list.txt file was downloaded from SRA Run Selector. Sratoolkit was used to download .sra files. <br>
 
-```<Shell>
+```<language>
 mkdir ../sraData
 /home/user/projects/Bioinfo/Tools/sratoolkit.3.0.0-centos_linux64/bin/prefetch --option-file ../SRR_Acc_List.txt -p -O /home/user/projects/Bioinfo/RNASeq/20220623/sraData &
 ```
@@ -15,7 +15,7 @@ mkdir ../sraData
 
 ## Conversion of SRA files to fastq files
 
-```<Shell>
+```<language>
 mkdir ../fastq
 for i in ../sraData/*.sra
 do
@@ -30,7 +30,7 @@ done
 FastQC was used to check the quality of fastq data. <br>
 MultiQC was used to generate a [merged QC report](./20220623/fastqc/multiqc_report.html). <br>
 Data quality was good enough for analysis. <br>
-```<Shell>
+```<language>
 mkdir ../fastqc
 mkdir ../logs/fastqc
 fastqc --outdir ../fastqc --threads 8 ../fastq/*.fastq.gz > ../logs/fastqc/log.txt 2>&1
@@ -43,7 +43,7 @@ multiqc ../fastqc/*.zip -o ../fastqc
 ## Reads filtering
 When processing data of low quality, sequnecing reads could be trimmed and filtered by Trimmomatic. <br>
 MultiQC was used to generate a [merged QC report](./20220623/fastqc/multiqc_report.html). <br>
-```<Shell>
+```<language>
 mkdir ../fastqTrim
 mkdir ../logs/trimmomatic
 cd ../fastqTrim
@@ -61,7 +61,7 @@ multiqc ./fastqc/*.zip -o ./fastqc
 ```
 ![trimmomatic](.//20220623/Records/trimmomatic.png)<br>
 Alternatively, fastp could be used to process and filter fastq files. [Fastp reports](./20220623/fastp/fastpAlbuterol-1.html) were generated individually.  <br>
-```<Shell>
+```<language>
 mkdir ../fastp
 mkdir ../logs/fastp
 cd ../fastq
@@ -85,7 +85,7 @@ done
 ![fastp-report](./20220623/Records/fastp-report.png)
 ## Mapping reads to human genome 
 RNASeq reads was mapped to human genome using HISAT2, generating .sam files. <br>
-```<Shell>
+```<language>
 mkdir -p ../aligned/fromFastp
 mkdir ../logs/hisat2
 cd ../fastp
@@ -102,7 +102,7 @@ done
 ## Data visualization in IGV
 Conversion of .sam to .bam files. Sorting and indexing .bam files by Samtools. <br>
 .bam adn corresponding .bai files could be loaded in IGV. <br>
-```<Shell>
+```<language>
 samtools view alignedFastpUntreated-2.sam -b > alignedFastpUntreated-2.bam
 samtools sort --threads 4 alignedFastpUntreated-2.bam -o alignedFastpUntreated-2_sorted.bam
 samtools index alignedFastpUntreated-2_sorted.bam
@@ -110,7 +110,7 @@ samtools index alignedFastpUntreated-2_sorted.bam
 ![IGV](./20220623/Records/IGV-PER1.png) <br>
 ## Quantification
 featureCounts was used for counting reads by genomic features. Results could be [summaried](./20220623/fastp/multiqc_report.html) by MultiQC. <br>
-```<Shell>
+```<language>
 featureCounts -p -T 4 -t gene -g gene_id \
 -a /home/user/projects/Bioinfo/Data/RefSeq/Human/GRCh38/gencode.v32.annotation.gtf \
 -o readCount.txt \
