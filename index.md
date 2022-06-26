@@ -1,7 +1,11 @@
-## RNASeq
-- [A case of discovering differentially expressed genes by RNASeq analysis](./RNASeq.md)
-## AmpliconSeq
+## RNASeq Analysis
+### [Reads Visualization and Quantification](./RNASeq%20Implementation/RNASeq-IGV.md)
+A case of visualizing RNASeq reads in IGV.
+### [Discovery of Differentially Expressed Genes](./RNASeq%20Implementation/RNASeq-DESeq2.md)
+A case of finding differentially expressed genes by DESeq2. 
+## AmpliconSeq Analysis
 AmpliconSeq: [AmpliconSeq.md](./AmpliconSeq.md)
-## Huangli
+## Something Interesting 
+### Huangli
 contents
 contents
