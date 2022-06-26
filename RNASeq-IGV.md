@@ -8,10 +8,10 @@ A SRR_Acc_list.txt file was downloaded from SRA Run Selector. Sratoolkit was use
 
 ```<language>
 mkdir ../sraData
-/home/user/projects/Bioinfo/Tools/sratoolkit.3.0.0-centos_linux64/bin/prefetch --option-file ../SRR_Acc_List.txt -p -O /home/user/projects/Bioinfo/RNASeq/20220623/sraData &
+/home/user/projects/Bioinfo/Tools/sratoolkit.3.0.0-centos_linux64/bin/prefetch --option-file ../SRR_Acc_List.txt -p -O /home/user/projects/Bioinfo/RNASeq/RNASeq%20Implementation/20220623/sraData &
 ```
 
-![sraDownload](./20220623/Records/sraDownload.png)
+![sraDownload](./RNASeq%20Implementation/20220623/Records/sraDownload.png)
 
 ## Conversion of SRA files to fastq files
 
@@ -23,12 +23,12 @@ echo $i
 /home/user/projects/Bioinfo/Tools/sratoolkit.3.0.0-centos_linux64/bin/fastq-dump --split-3 --gzip ../sraData/$i -O ../fastq
 done
 ```
-![sra2fastq](./20220623/Records/sra2fastq.png) <br>
+![sra2fastq](./RNASeq%20Implementation/20220623/Records/sra2fastq.png) <br>
 <br>fastq.gz files can be unzipped and checked out in gedit.  <br><br>
-![fastq-untreated-1](./20220623/Records/fastq-untreated-1.png)
+![fastq-untreated-1](./RNASeq%20Implementation/20220623/Records/fastq-untreated-1.png)
 ## QC on fastq files
 FastQC was used to check the quality of fastq data. <br>
-MultiQC was used to generate a [merged QC report](./20220623/fastqc/multiqc_report.html). <br>
+MultiQC was used to generate a [merged QC report](./RNASeq%20Implementation/20220623/fastqc/multiqc_report.html). <br>
 Data quality was good enough for analysis. <br>
 ```<language>
 mkdir ../fastqc
@@ -36,13 +36,13 @@ mkdir ../logs/fastqc
 fastqc --outdir ../fastqc --threads 8 ../fastq/*.fastq.gz > ../logs/fastqc/log.txt 2>&1
 multiqc ../fastqc/*.zip -o ../fastqc
 ```
-![fastqgz2fastqc](./20220623/Records/fastqgz2fastqc.png)<br>
+![fastqgz2fastqc](./RNASeq%20Implementation/20220623/Records/fastqgz2fastqc.png)<br>
 
-![multiqc-general stats](./20220623/Records/multiqc-general%20stats.png)
-![multiqc-scores](./20220623/Records/multiqc-scores.png)<br>
+![multiqc-general stats](./RNASeq%20Implementation/20220623/Records/multiqc-general%20stats.png)
+![multiqc-scores](./RNASeq%20Implementation/20220623/Records/multiqc-scores.png)<br>
 ## Reads filtering
 When processing data of low quality, sequnecing reads could be trimmed and filtered by Trimmomatic. <br>
-MultiQC was used to generate a [merged QC report](./20220623/fastqc/multiqc_report.html). <br>
+MultiQC was used to generate a [merged QC report](./RNASeq%20Implementation/20220623/fastqc/multiqc_report.html). <br>
 ```<language>
 mkdir ../fastqTrim
 mkdir ../logs/trimmomatic
@@ -59,8 +59,8 @@ mkdir ../logs/fastqTrimFastqc
 fastqc --outdir ./fastqc --threads 8 ./*.fastq.gz > ../logs/fastqTrimFastqc/log.txt 2>&1
 multiqc ./fastqc/*.zip -o ./fastqc
 ```
-![trimmomatic](.//20220623/Records/trimmomatic.png)<br>
-Alternatively, fastp could be used to process and filter fastq files. [Fastp reports](./20220623/fastp/fastpAlbuterol-1.html) were generated individually.  <br>
+![trimmomatic](.//RNASeq%20Implementation/20220623/Records/trimmomatic.png)<br>
+Alternatively, fastp could be used to process and filter fastq files. [Fastp reports](./RNASeq%20Implementation/20220623/fastp/fastpAlbuterol-1.html) were generated individually.  <br>
 ```<language>
 mkdir ../fastp
 mkdir ../logs/fastp
@@ -81,8 +81,8 @@ echo $i
 --length_required 36 > ../logs/fastp/fastp$i.txt 2>&1 
 done
 ```
-![fastp-log](./20220623/Records/fastp-log.png)
-![fastp-report](./20220623/Records/fastp-report.png)
+![fastp-log](./RNASeq%20Implementation/20220623/Records/fastp-log.png)
+![fastp-report](./RNASeq%20Implementation/20220623/Records/fastp-report.png)
 ## Mapping reads to human genome 
 RNASeq reads was mapped to human genome using HISAT2, generating .sam files. <br>
 ```<language>
@@ -98,7 +98,7 @@ hisat2 -t -x \
 -S ../aligned/fromFastp/alignedFastp${i}.sam 2>&1 | tee ../logs/hisat2/alignedFastp${i}.txt
 done
 ```
-![HISAT2](./20220623/Records/HISAT2.png)<br>
+![HISAT2](./RNASeq%20Implementation/20220623/Records/HISAT2.png)<br>
 ## Data visualization in IGV
 Conversion of .sam to .bam files. Sorting and indexing .bam files by Samtools. <br>
 .bam adn corresponding .bai files could be loaded in IGV. <br>
@@ -107,9 +107,9 @@ samtools view alignedFastpUntreated-2.sam -b > alignedFastpUntreated-2.bam
 samtools sort --threads 4 alignedFastpUntreated-2.bam -o alignedFastpUntreated-2_sorted.bam
 samtools index alignedFastpUntreated-2_sorted.bam
 ```
-![IGV](./20220623/Records/IGV-PER1.png) <br>
+![IGV](./RNASeq%20Implementation/20220623/Records/IGV-PER1.png) <br>
 ## Quantification
-featureCounts was used for counting reads by genomic features. Results could be [summaried](./20220623/fastp/multiqc_report.html) by MultiQC. <br>
+featureCounts was used for counting reads by genomic features. Results could be [summaried](./RNASeq%20Implementation/20220623/fastp/multiqc_report.html) by MultiQC. <br>
 ```<language>
 featureCounts -p -T 4 -t gene -g gene_id \
 -a /home/user/projects/Bioinfo/Data/RefSeq/Human/GRCh38/gencode.v32.annotation.gtf \
@@ -119,9 +119,9 @@ alignedFastpUntreated-1_sorted.bam alignedFastpUntreated-2_sorted.bam \
 > ../../logs/featureCounts/log.txt 2>&1
 multiqc readCount.txt.summary
 ```
-![featureCounts](./20220623/Records/featureCounts.png)<br>
+![featureCounts](./RNASeq%20Implementation/20220623/Records/featureCounts.png)<br>
 featureCounts generated a tab-delimited readCount.txt file which can be further analyzed. <br><br>
-![readCounts](./20220623/Records/featureCounts-readCount.png)<br>
+![readCounts](./RNASeq%20Implementation/20220623/Records/featureCounts-readCount.png)<br>
 
 
 

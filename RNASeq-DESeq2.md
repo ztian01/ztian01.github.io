@@ -6,7 +6,7 @@
 ## Normalization
 RNASeq data of untreated and dexamethasone-treated samples was downloaded and processed. 
 Reads quantification was conducted as described in [Reads Visualization and Quantification](./RNASeq-IGV.md)<br>
-![rawCounts](20220623/Records/rawCounts.png)<br>
+![rawCounts](./RNASeq%20Implementation/20220623/Records/rawCounts.png)<br>
 ```<R>
 options(stringsAsFactors = FALSE)
 raw_count <- read.table("readCount-edited.txt", sep = "\t", header = T)
@@ -30,7 +30,7 @@ rld <- rlogTransformation(dds)
 write.csv(assay(rld), file="rld.csv")
 
 ```
-![rld](20220623/Records/rld.png)<br>
+![rld](./RNASeq%20Implementation/20220623/Records/rld.png)<br>
 
 ## DEG analysis
 ```<R>
@@ -65,7 +65,7 @@ write.csv(res,file="All_results.csv")
 diff_gene <-subset(res, padj < 0.05 & abs(log2FoldChange) > 2)
 write.csv(diff_gene,file= "DEG_treat_vs_control.csv")
 ```
-![AllResults](20220623/Records/AllResults.png)<br>
+![AllResults](./RNASeq%20Implementation/20220623/Records/AllResults.png)<br>
 
 ## Visualization in volcano plot
 ```<R>
@@ -89,4 +89,4 @@ res.top10.gene =c(as.character(up.gene),as.character(down.gene))
 res$label[match(res.top10.gene,res$external_gene_name)]=res.top10.gene
 ggscatter(res,x= "log2FoldChange", y="logp",color="type", palette=c("#2f5688", "#BBBBBB", "#CC0000"),size=1, label=res$label, font.label=8, repel=T, xlab="log2FoldChange", ylab="-log10(p-value)") +theme_base()+geom_hline(yintercept=-log(0.05,10), linetype="dashed")+geom_vline(xintercept=c(-2,2), linetype="dashed")
 ```
-![volcano-with-label](20220623/Records/volcano-with-label.png)
+![volcano-with-label](./RNASeq%20Implementation/20220623/Records/volcano-with-label.png)
