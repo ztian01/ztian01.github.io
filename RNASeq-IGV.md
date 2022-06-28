@@ -1,5 +1,5 @@
 # RNASeq Analysis - Reads Visualization and Quantification
-**Languages:** Shell <br>
+**Language:** Shell <br>
 **Softwares / packages:** sratoolkit, FastQC, MultiQC, Trimmomatic, fastp, HISAT2, Samtools, featureCounts <br>
 **Data:**  Himes, Blanca E., et al. "RNA-Seq transcriptome profiling identifies CRISPLD2 as a glucocorticoid responsive
  gene that modulates cytokine function in airway smooth muscle cells." PloS one 9.6 (2014): e99625.

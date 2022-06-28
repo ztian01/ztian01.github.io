@@ -1,5 +1,5 @@
 # RNASeq Analysis - Discovery of Differentially Expressed Genes
-**Languages:** R <br>
+**Language:** R <br>
 **Softwares / packages:** RStudio, DESeq2 <br>
 **Data:**  Himes, Blanca E., et al. "RNA-Seq transcriptome profiling identifies CRISPLD2 as a glucocorticoid responsive
  gene that modulates cytokine function in airway smooth muscle cells." PloS one 9.6 (2014): e99625.
